@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.View;
+import android.widget.Toast;
 
 import com.luoyang.aidlclient.databinding.ActivityMainBinding;
 import com.luoyang.aidldemo.IMyAidlInterface;
@@ -57,6 +58,10 @@ public class MainActivity extends Activity {
                 if (binding.editText2.getText().length() == 0) binding.editText2.setText("0");
                 int i = Integer.parseInt((binding.editText.getText().toString()));
                 int i1 = Integer.parseInt((binding.editText2.getText().toString()));
+                if (iMyAidlInterface == null) {
+                    Toast.makeText(this, "服务未启动", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 int i2 = iMyAidlInterface.add(i, i1);
                 binding.textView3.setText("" + i2);
                 break;
